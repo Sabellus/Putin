@@ -5,35 +5,47 @@
  */
 
 import React, { Component } from 'react';
+import {StackNavigator} from 'react-navigation';
+import { StatusBar } from 'react-native';
+
+
+
+
+import DateScreen  from './Components/DateScreen'
+import ResultScreen  from './Components/ResultScreen'
+
 import {
   Platform,
   StyleSheet,
   Text,
-  View
+  View,
+  
 } from 'react-native';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+const AppNavigator = StackNavigator(
+  { 
+  Home: {screen: DateScreen },
+  ResultScreen: {screen: ResultScreen}, 
+  },
+  {
+    headerMode: 'none',
+    navigationOptions: {
+      headerVisible: false,
+    }
+  }
+);
 
-type Props = {};
-export default class App extends Component<Props> {
+export default class App extends React.Component {
+  constructor(props){
+    super(props); 
+
+  }    
   render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit App.js
-        </Text>
-        <Text style={styles.instructions}>
-          {instructions}
-        </Text>
-      </View>
+    return (            
+        <AppNavigator
+            // dispatch ={this.props.dispatch}
+            // state={this.props.nav}
+          />         
     );
   }
 }
@@ -55,4 +67,5 @@ const styles = StyleSheet.create({
     color: '#333333',
     marginBottom: 5,
   },
+
 });
